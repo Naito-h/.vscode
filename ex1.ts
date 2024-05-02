@@ -1,3 +1,5 @@
+import { PublicKeyInput } from "crypto";
+
 const getLength = (text: string /* ✍🏼 ここに型注釈を書きます */) => {
     return text.length;
   };
@@ -11,6 +13,10 @@ const getLength = (text: string /* ✍🏼 ここに型注釈を書きます */)
   getLength(10);
   getLength({});
   getLength(null);
+
+
+
+
 
   const double = (array: number[] /* ✍🏼 ここに型注釈を書きます */) => {
     return array.map((num) => num * 2);
@@ -26,6 +32,10 @@ const getLength = (text: string /* ✍🏼 ここに型注釈を書きます */)
   double([1, "2", null]);
   double(1);
   double({});
+
+
+
+
 
   const message = (user: { name: string; age: number } /* ✍🏼ここに型注釈を書きます */) => {
     console.log(
@@ -44,6 +54,10 @@ const getLength = (text: string /* ✍🏼 ここに型注釈を書きます */)
   message({ namae: "二郎", age: 30 }); // キーを間違えているのでエラーにしたい
   message({ name: "三郎" }); // 必須のキーが抜けているのでエラーにしたい
   message({ name: "四郎", age: 30, mail: "shiro@example.com" }); // 不要なキーがあるのでエラーにしたい
+
+
+
+
 
   const happyBirthday = (birthday: { year?: number; month: number; day: number } /* ✍🏼 ここに型注釈を書きます */) => {
     const today = { year: 2024, month: 1, day: 1 };
@@ -69,6 +83,10 @@ const getLength = (text: string /* ✍🏼 ここに型注釈を書きます */)
   // ❌ 以下はエラーにしてください
   happyBirthday({ year: 2000, month: 1 }); // day がないのでエラーにしたい
   happyBirthday({ year: 1995, day: 31 }); // month がないのでエラーにしたい
+
+
+
+
 
   const call = (func: (num :number) => void /* ✍🏼 ここに型注釈を書きます */) => {
     const rand = Math.random() * 10;
@@ -98,3 +116,34 @@ const getLength = (text: string /* ✍🏼 ここに型注釈を書きます */)
     // 存在しない引数を使おうとしているのでエラーにしたい
     console.log("called");
   });
+
+
+
+
+
+  const isHoliday = (date: Date /* ✍🏼 ここに型注釈を書きます */) => {
+    const day = date.getDay();
+    return day === 0 || day === 6;
+  };
+  
+  // ✅ 想定通りのコード。エラーにならないようにしてください
+  isHoliday(new Date());
+  isHoliday(new Date("2024-02-10"));
+  isHoliday(new Date("2017-10-12"));
+  
+  // ❌ 以下はエラーにしてください
+  isHoliday("2024-01-01"); // Date 以外を渡そうとしているのでエラーにしたい
+  isHoliday(20381010); // Date 以外を渡そうとしているのでエラーにしたい
+
+
+
+
+  
+  const handleKeyDown = (e: KeyboardEvent /* ✍🏼 ここに型注釈を書きます */) => {
+    // ✅ 想定通りのコード。エラーにならないようにしてください
+    if (e.key === "Enter") {
+      console.log("Enter キーが押されました");
+    }
+  };
+  
+  document.body.addEventListener("keydown", handleKeyDown);
