@@ -208,3 +208,57 @@ type Result =  | { error: false; value: number } | { error: true; message: strin
       return { error: false, value: Math.sqrt(input) };
     }
   };
+
+
+
+
+  const action = (light: "RED" | "YELLOW" | "GREEN") => {
+    switch (light) {
+      case "RED": {
+        console.log("止まれ");
+        break;
+      }
+      case "GREEN": {
+        console.log("進め");
+        break;
+      }
+      case "YELLOW": {
+        console.log("急げ");
+        break;
+      }
+      default: {
+        // ❌"YELLOW" に対する処理が抜けているのでエラーにしてください
+        // ✍🏼 このブロックに到達したらエラーになるように修正してください
+        light satisfies never;
+        break;
+      }
+    }
+  };
+  
+  action("RED");
+  action("GREEN");
+  action("YELLOW");
+
+
+
+
+  const func = (arg: string) => {
+    const parsed: unknown = JSON.parse(arg);
+    // ✍🏼 エラーにならないように修正してください
+    if(
+        typeof parsed === "object" &&
+        parsed !== null &&
+        "name" in parsed &&
+        typeof parsed.name === "string"
+    ){
+        console.log(parsed.name.toUpperCase());
+    }
+  };
+  
+  func(`{ "name": "Alice" }`); // "ALICE"
+  func(`{ "name": "bob" }`); // "BOB"
+  
+  func(`{ "name": 404 }`); // 実行時にエラーになります
+  func(`{ "age": 20 }`); // 実行時にエラーになります
+  func("null"); // 実行時にエラーになります
+  func("true"); // 実行時にエラーになります
